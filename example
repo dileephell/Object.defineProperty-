@@ -1,0 +1,65 @@
+function Player(id) {
+    this.id = id;
+    this.healthid = this.id + "health";
+    this.displayText = "blah blah";
+    this.inFight = false;
+	this.currentLocation = 0;
+	this.xp = 0;
+	this.level = 1;
+}
+
+var player = new Player('player');
+
+Object.defineProperty(player,"health",{ 
+	set: function() { 
+	return 10 + ( this.level * 15 );
+	}, 
+	get: function() { 
+	return 10 + ( this.level * 15 );
+	},
+    enumerable:true
+} );
+	
+player.currentHealth = player.health;
+
+Object.defineProperty(player,"strength",{ 
+	set: function() { 
+		return ( this.level * 5 );
+	}, 
+	get: function() { 
+		return ( this.level * 5 );
+	},
+    enumerable:true
+} );
+
+Object.defineProperty(player,"hitRating",{ 
+	set: function() { 
+		return 3 + ( this.level );
+	}, 
+	get: function() { 
+		return 3 + ( this.level );
+	},
+    enumerable:true
+} );
+
+
+function displayStats() {
+	var statsHtml = "";
+	for ( var prop in player ) {
+		if ( prop != "inFight" && prop != "currentLocation" && prop != "displayText" && prop != "id" && prop != "healthid" ) {
+			statsHtml += "<p id = 'displayPlayerHealth'>" + prop + "</p>";
+		}
+	}
+	$('.stats').html( statsHtml);
+	console.log(statsHtml);
+}
+
+console.log(player.hitRating);
+
+displayStats();
+
+
+in HTML: 
+<div class="stats"></div>
+
+http://jsfiddle.net/dileephell/8jpCM/4/
